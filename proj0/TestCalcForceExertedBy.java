@@ -8,6 +8,7 @@ public class TestCalcForceExertedBy {
     /**
      *  Tests calcForceExertedBy.
      */
+    
     public static void main(String[] args) {
         checkCalcForceExertedBy();
     }

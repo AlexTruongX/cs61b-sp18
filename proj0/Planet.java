@@ -19,10 +19,10 @@ public class Planet {
 
 	}
 	public Planet(Planet b) {
-
-		/* 1) New keyword is a Java operator that creates an object. 
-		   2) New operator is followed by a call to a constructor,
-		      which initializes the new object.                    */
+		/**	1) New keyword is a Java operator that creates an object. 
+		   	2) New operator is followed by a call to a constructor,
+			which initializes the new object.
+		*/
 		this.xxPos = b.xxPos;
 		this.yyPos = b.yyPos;
 		this.xxVel = b.xxVel;
@@ -33,12 +33,7 @@ public class Planet {
 	}
 
 	public double calcDistance(Planet n) {
-		/* This method takes in a single Planet and 
-			returns a double equal to the distance
-			between the supplied planet and the planet
-			doing the calculation 
-			e.g samh.calcDistance(rocinante) */
-		
+		/* Applies Distance Formula between Planet's positions */
 		double x1 = this.xxPos;
 		double y1 = this.yyPos;
 		double x2 = n.xxPos;
@@ -50,10 +45,11 @@ public class Planet {
 	}
 	
 	public double calcForceExertedBy(Planet n) {
-		/* Instance Method that calculates the force Planet n exerts onto this instance's Planet */
-		// EQUATION:  F = (G * m1 * m2)/r^2
-
-		double m1 = n.mass; // Planet n's mass comes first because Planet n is EXERTING FORCE onto "this planet"
+		/**	Instance Method that calculates the force Planet n exerts onto this instance's Planet 
+		* 	EQUATION:  F = (G * m1 * m2)/r^2
+		*	Planet n's mass comes first because Planet n is EXERTING FORCE onto "this planet"
+		*/
+		double m1 = n.mass; 
 		double m2 = this.mass; 
 		double x_Diff = n.xxPos - this.xxPos;
 		double y_Diff = n.yyPos - this.yyPos;
@@ -62,6 +58,7 @@ public class Planet {
 		return ((gravity*m1*m2)/r_squared);
 	}
 	public double calcForceExertedByX(Planet n) {
+		/* Calculates net Force in x direction between two planets */
 		double force = this.calcForceExertedBy(n);
 		double dx = n.xxPos - this.xxPos;
 		double dy = n.yyPos - this.yyPos;
@@ -70,6 +67,7 @@ public class Planet {
 		return ((force*dx)/r);
 	}
 	public double calcForceExertedByY(Planet n) {
+		/* Calculates net Force in y direction between two planets */
 		double force = this.calcForceExertedBy(n);
 		double dx = n.xxPos - this.xxPos;
 		double dy = n.yyPos - this.yyPos;
@@ -77,8 +75,8 @@ public class Planet {
 
 		return ((force*dy)/r);
 	}
-
 	public double calcNetForceExertedByX(Planet[] n) {
+		/* Calcuates TOTAL net X force of ALL planets within n array and the current planet "this" */
 		double netForceExertedByX = 0.0;
 		for (int i=0; i < n.length; i++) {
 			if (this.equals(n[i])) {
@@ -93,8 +91,8 @@ public class Planet {
 	public double calcNetForceExertedByY(Planet[] n) {
 		/* The sum of all Planet's forces within the n[] EXERTED ONTO the current planet's */
 		double netForceExertedByY = 0.0;
-		for (Planet i : n) {
-			if (this.equals(i)) {
+		for (Planet i : n) { // Enhanced for loop where "i" takes on the identity of each Planet in n exactly once 
+			if (this.equals(i)) { // It continues from n[0] -> n[n.length-1]
 				continue;
 			}
 			else {

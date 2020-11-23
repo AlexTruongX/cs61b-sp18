@@ -13,11 +13,9 @@ public class NBody {
 
     public static Planet[] readPlanets(String fileName) {
         In in = new In(fileName);
-        Planet[] planetList = new Planet[5];
-
-        /* Skips first two lines of code */
-        in.readLine();
-        in.readLine();
+        int arraySize = in.readInt();
+        Planet[] planetList = new Planet[arraySize];
+        in.readDouble(); // Skips the universe radius
 
         /** Creates an array of planets using data from fileName
         *   Every loop corresponds to 1 Planet instance created. 

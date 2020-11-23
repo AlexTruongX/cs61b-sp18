@@ -78,18 +78,18 @@ public class Planet {
 	public double calcNetForceExertedByX(Planet[] n) {
 		/* Calcuates TOTAL net X force of ALL planets within n array and the current planet "this" */
 		double netForceExertedByX = 0.0;
-		for (int i=0; i < n.length; i++) {
-			if (this.equals(n[i])) {
+		for (Planet i: n) {
+			if (this.equals(i)) {
 				continue;
 			}
 			else {
-				netForceExertedByX += this.calcForceExertedByX(n[i]);
+				netForceExertedByX += this.calcForceExertedByX(i);
 			}	
 		}
 		return netForceExertedByX; 
 	}
 	public double calcNetForceExertedByY(Planet[] n) {
-		/* The sum of all Planet's forces within the n[] EXERTED ONTO the current planet's */
+		/* The sum of all Planet's forces within the n[] EXERTED ONTO the current planet */
 		double netForceExertedByY = 0.0;
 		for (Planet i : n) { // Enhanced for loop where "i" takes on the identity of each Planet in n exactly once 
 			if (this.equals(i)) { // It continues from n[0] -> n[n.length-1]
@@ -130,5 +130,9 @@ public class Planet {
 		this.xxVel = newVelX;
 		this.yyVel = newVelY;
 
+	}
+
+	public void draw() {
+		StdDraw.picture(this.xxPos, this.yyPos, "images/" + this.imgFileName);
 	}
 }

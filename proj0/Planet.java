@@ -6,7 +6,7 @@ public class Planet {
 	public double yyVel; // Current velocity in Y direction
 	public double mass; // Mass
 	public String imgFileName; // Name of file that corresponds to img in body e.g jupiter.gif
-	static final double gravity = 6.67e-11; // Good practice to declare any constants as "static final variable in class"
+	private static final double gravity = 6.67e-11; // Good practice to declare any constants as "static final variable in class"
 
 	public Planet(double xP, double yP, double xV,
 				double yV, double m, String img) {

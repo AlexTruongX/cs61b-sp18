@@ -77,9 +77,9 @@ public class IntList {
 
     /**
      * Returns a list consisting of the elements of A followed by the
-     * *  elements of B.  May modify items of A. Don't use 'new'.
+     * elements of B.  May modify items of A. Don't use 'new'.
+     * Using recursive structure.
      */
-
     public static IntList dcatenate(IntList A, IntList B) {
         if (A == null) {
             A = B;
@@ -89,6 +89,12 @@ public class IntList {
             return A;
         }
     }
+
+    /**
+     * Returns a list consisting of the elements of A followed by the
+     * elements of B.  May modify items of A. Don't use 'new'.
+     * Using iterative structure.
+     */
     public static IntList dcatenateIterative(IntList A, IntList B) {
         IntList newA = A;
         if (A == null) {
@@ -107,7 +113,8 @@ public class IntList {
 
     /**
      * Returns a list consisting of the elements of A followed by the
-     * * elements of B.  May NOT modify items of A.  Use 'new'.
+     * elements of B.  May NOT modify items of A.  Use 'new'.
+     * Using recursive structure.
      */
     public static IntList catenate(IntList A, IntList B) {
         if (A == null) {
@@ -117,6 +124,12 @@ public class IntList {
             return new IntList(A.first, catenate(A.rest, B));
         }
     }
+
+    /**
+     * Returns a list consisting of the elements of A followed by the
+     * elements of B.  May NOT modify items of A.  Use 'new'.
+     * Using iterative structure.
+     */
     public static IntList catenateIterative(IntList A, IntList B) {
         if (A == null) {
             return null;

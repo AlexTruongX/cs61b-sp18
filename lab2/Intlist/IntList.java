@@ -104,6 +104,8 @@ public class IntList {
     public static IntList catenate(IntList A, IntList B) {
         if (A == null && B != null) {
             return B;
+        } elif (B == null && A != null) {
+            return A;
         }
         return new IntList(A.first, catenate(A.rest, B));
     }

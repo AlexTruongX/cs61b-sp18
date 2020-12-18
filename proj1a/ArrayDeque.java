@@ -1,5 +1,5 @@
 public class ArrayDeque<T> {
-    private T[] items;
+    public T[] items;
     private int size;
     private int nextFirst;
     private int nextLast;
@@ -13,8 +13,8 @@ public class ArrayDeque<T> {
     public ArrayDeque() {
         items = (T[]) new Object[8];
         size = 0;
-        nextFirst = 4;
-        nextLast = 6;
+        nextFirst = 0;
+        nextLast = 1;
     }
 
     private double capacity() {
@@ -22,11 +22,8 @@ public class ArrayDeque<T> {
         if (items.length < 16 && (usage_factor < 0.25)) {
             return items.length; // Do nothing if array size is <16 and
         } else if (usage_factor > 0.25) {
-            System.out.println("Upsizing!");
             return 2;
         } else {
-            System.out.println("Downsizing!");
-            updateNext();
             return 0.5;
         }
 /*      1. Performing a check on item deletion in array -> resize if extra space is unnecessary
@@ -79,7 +76,6 @@ public class ArrayDeque<T> {
         updateNext();
         items[nextLast] = item;
         nextLast += 1;
-        // Need to move and resize array if no space.
         size += 1;
     }
 
@@ -97,6 +93,7 @@ public class ArrayDeque<T> {
         T first_item = items[nextFirst+1];
         items[nextFirst + 1] = null;
         nextFirst = nextFirst+1;
+        updateNext();
         return first_item;
     }
 
@@ -114,6 +111,7 @@ public class ArrayDeque<T> {
         T last_item = items[nextLast-1];
         items[nextLast - 1] = null;
         nextLast = nextLast - 1;
+        updateNext();
         return last_item;
     }
 
@@ -147,6 +145,7 @@ public class ArrayDeque<T> {
         }
     }
 
+    /*
     public static void main(String[] args) {
         ArrayDeque<Integer> test = new ArrayDeque<>();
         for (int i = 0; i < 1000; i++) {
@@ -158,5 +157,5 @@ public class ArrayDeque<T> {
         test.addFirst(10);
         test.addFirst(20);
         test.printDeque();
-    }
+    } */
 }

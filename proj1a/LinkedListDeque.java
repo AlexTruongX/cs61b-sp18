@@ -14,19 +14,12 @@ public class LinkedListDeque<T> {
     private Node sentinel;
     private int size;
 
+    /* Constructor for LLDeque */
     public LinkedListDeque() {
         sentinel = new Node(sentinel, null, sentinel);
         sentinel.next = sentinel;
         sentinel.prev = sentinel;
         size = 0;
-    }
-
-    public LinkedListDeque(T item) {
-        // First item is at sentinel.next
-        sentinel = new Node(sentinel, null, sentinel);
-        sentinel.next = new Node(sentinel, item, sentinel);
-        sentinel.prev = sentinel.next;
-        size = 1;
     }
 
     /* Adds an item of type T to the FRONT of the deque. */
@@ -46,7 +39,7 @@ public class LinkedListDeque<T> {
 
     /* Returns true if deque is empty, false otherwise. */
     public boolean isEmpty() {
-        if (sentinel.next.item == null) { // Checks if there exists a .next, if there is return false, otherwise true.
+        if (sentinel.next.item == null) { // If there is .next return true, otherwise false.
             return true;
         }
         return false;
@@ -118,11 +111,11 @@ public class LinkedListDeque<T> {
     public T getRecursive(int index) {
         return getRecursive(sentinel.next, index);
     }
-
+/*
     public static void main(String[] args) {
         LinkedListDeque<String> test = new LinkedListDeque<>();
         test.addFirst("front");
         test.addLast("back");
         test.addFirst("l0ser");
-    }
+    } */
 }

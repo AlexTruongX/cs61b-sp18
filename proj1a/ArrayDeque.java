@@ -167,7 +167,7 @@ public class ArrayDeque<T> {
         }
         return items[index];
     }
-
+    /*
     public static void main(String[] args) {
         ArrayDeque<Integer> test = new ArrayDeque<>();
         test.addFirst(-1);
@@ -190,5 +190,5 @@ public class ArrayDeque<T> {
         }
         test.isEmpty();
         test.printDeque();
-    }
+    } */
 }

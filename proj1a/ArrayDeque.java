@@ -64,19 +64,17 @@ public class ArrayDeque<T> {
         items = tmp_arr;
     }
 
-    /* Updates nextFirst */
+    /* Updates nextFirst & nextLast */
     private void update_next_first() {
         if (nextFirst == -1) {
             nextFirst = items.length - 1; // Continues at end of underlying array.
         }
     }
-
     private void update_next_last() {
         if (nextLast > items.length - 1) {
             nextLast = 0;
         }
     }
-
     public void update_next_both() {
         if (size == items.length) {
             int nextLast_start_pos = items.length;
@@ -96,41 +94,12 @@ public class ArrayDeque<T> {
         update_next_both();
     }
 
+    /* Adds an item of type T to the back of the deque */
     public void addLast(T item) {
         size += 1;
         items[nextLast] = item;
         nextLast += 1;
         update_next_both();
-    }
-
-    /* Removes and returns item at front of the deque */
-    public T removeFirst() {
-        /* If at the very last indice of the underlying array */
-        if (nextFirst + 1 == items.length) {
-            nextFirst = -1;
-        }
-        if (items[nextFirst + 1] == null) {
-            return null;
-        } size -= 1;
-        T first_item = items[nextFirst + 1];
-        items[nextFirst + 1] = null;
-        nextFirst = nextFirst + 1;
-        update_next_both();
-        return first_item;
-    }
-
-    public T removeLast() {
-        if (nextLast - 1 == -1) {
-            nextLast = items.length - 1;
-        }
-        if (items[nextLast - 1]== null) {
-            return null;
-        } size -= 1;
-        T last_item = items[nextLast-1];
-        items[nextLast - 1] = null;
-        nextLast = nextLast - 1;
-        update_next_both();
-        return last_item;
     }
 
     /* Returns true if deque is empty, false otherwise */
@@ -139,6 +108,56 @@ public class ArrayDeque<T> {
             return true;
         }
         return false;
+    }
+
+    /* Returns the number of items in the deque */
+    public int size() {
+        return size;
+    }
+
+    /* Prints the items in the deque from first to last, separated by a space */
+    public void printDeque() {
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] != null) {
+                System.out.print(items[i] + " ");
+            }
+        }
+    }
+
+    /* Removes and returns item at front of the deque */
+    public T removeFirst() {
+        double usage_factor = (double)size/items.length;
+        /* If at the very last indice of the underlying array */
+        if (nextFirst + 1 == items.length) {
+            nextFirst = -1;
+        }
+        if (items[nextFirst + 1] == null) {
+            return null;
+        } else if (usage_factor < 0.25) {
+            resize();
+        } size -= 1;
+        T first_item = items[nextFirst + 1];
+        items[nextFirst + 1] = null;
+        nextFirst = nextFirst + 1;
+        update_next_both();
+        return first_item;
+    }
+    /* Removes and returns item at the back of the deque */
+    public T removeLast() {
+        double usage_factor = (double)size/items.length;
+        if (nextLast - 1 == -1) {
+            nextLast = items.length - 1;
+        }
+        if (items[nextLast - 1]== null) {
+            return null;
+        } else if (usage_factor < 0.25) {
+            resize();
+        } size -= 1;
+        T last_item = items[nextLast-1];
+        items[nextLast - 1] = null;
+        nextLast = nextLast - 1;
+        update_next_both();
+        return last_item;
     }
 
     /* Gets the item at the given index */
@@ -162,9 +181,14 @@ public class ArrayDeque<T> {
         for (int i = 0; i < 5; i++) {
             int xd = test.removeFirst();
         }
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 1000; i++) {
             test.removeLast();
         }
+
+        for (int i = 0; i < 250; i++) {
+            test.removeFirst();
+        }
         test.isEmpty();
+        test.printDeque();
     }
 }

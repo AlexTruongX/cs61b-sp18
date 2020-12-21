@@ -1,14 +1,21 @@
+/**
+ * Deque implementation using circular array
+ *
+ * @author Alex Truong
+ */
+
 public class ArrayDeque<T> {
-    private double usageFactor = 0.25;
     private T[] items;
     private int size;
-    private int nextFirst;
-    private int nextLast;
+    private int nextFirst; // Pointer to front
+    private int nextLast; // Pointer to last
+    private double usageFactor = 0.25;
 
     /*  Invariants:
      *   1. nextFirst is the INDICE used when adding a new item to front of the list.
      *   2. nextLast is the INDICE used when adding a new item to the end of the list.
-     *   3. Size represents the amount of items in the list.
+     *   3. Size always represents the amount of items in the list.
+     * -------------------------------------------------------------------------------
      *   4. plusOne(nextFirst) is the INDICE of the CURRENT FIRST item in the deque.
      *   5. minusOne(nextLast) is the INDICE of the CURRENT LAST item in the deque.
      * -------------------------------------------------------------------------------
@@ -27,17 +34,17 @@ public class ArrayDeque<T> {
         nextLast = 5;
     }
 
-    /** Computes index immediately after a given index.
-     *  Circles back to start of underlying array
-     *  if it exceeds items.length.
+    /**
+     * Computes index immediately after a given index.
+     * Source for using % to get circular implementation:
+     * https://stackoverflow.com/questions/8651965/java-array-traversal-in-circular-manner
      * */
     private int plusOne(int index) {
         return (index + 1) % items.length;
     }
-    /* Computes index immediately before a given index.
-    *  Circles back to end of underlying array if it
-    *  exceeds item.length.
-    * */
+    /**
+     * Computes index immediately before a given index.
+     * */
     private int minusOne(int index) {
         if (index - 1 == -1) {
             return items.length - 1;
@@ -59,7 +66,7 @@ public class ArrayDeque<T> {
         usageFactor = (double) size / items.length;
     }
 
-    /* Increases size of the array when size == items.length */
+    /* Increases size of array */
     private void upSize(int capacity) {
         sort();
         T[] newArr = (T[]) new Object[capacity];
@@ -89,7 +96,7 @@ public class ArrayDeque<T> {
         calculateUsageFactor();
     }
 
-    /* Resize method for downsizing array */
+    /* Downsize the array, assuming current size > given capacity */
     private void downSize(int capacity) {
         sort();
         T[] newArr = (T[]) new Object[capacity];

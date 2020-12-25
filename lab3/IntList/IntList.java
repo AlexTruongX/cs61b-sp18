@@ -11,11 +11,11 @@ public class IntList {
     /**
      * First element of list.
      */
-    public int first;
+    private int first;
     /**
      * Remaining elements of list.
      */
-    public IntList rest;
+    private IntList rest;
 
     /**
      * A List with first FIRST0 and rest REST0.
@@ -156,23 +156,14 @@ public class IntList {
         // 4 -> 3 -> 2 -> 1 -> null
         IntList tempCurr;
         IntList prev = null;
-        while(A != null) {
-            tempCurr = A; // Stores pointer at current position (e.g 1)
-            A = A.rest; // Points
-            tempCurr.rest = prev; // 1 should now point to null | 1 -> null | 2 -> 1 -> null | 3 -> 2 -> 1 -> null | 4 -> 3 -> 2 -> 1 -> null
-            prev = tempCurr; // Prev pointer should point to 1 | prev = 1 | prev = 2 | prev = 3 | prev = 4
+        while (A != null) {
+            tempCurr = A; // Stores pointer at (1)
+            A = A.rest; // Points to (2, 3, 4)
+            tempCurr.rest = prev; // 1 should now point to null
+            prev = tempCurr; // Prev stores pointer to 1, so 2 knows what to point to.
         }
         return prev;
     }
-
-
-
-
-
-
-
-
-
 
 
 

@@ -154,17 +154,15 @@ public class IntList {
     public static IntList reverse(IntList A) {
        // 1 -> 2 -> 3 -> 4 -> null
         // 4 -> 3 -> 2 -> 1 -> null
-        IntList curr = A;
         IntList tempCurr;
         IntList prev = null;
-        while(curr != null) {
-            tempCurr = curr; // Stores pointer at current position (e.g 1)
-            curr = curr.rest; // Points
+        while(A != null) {
+            tempCurr = A; // Stores pointer at current position (e.g 1)
+            A = A.rest; // Points
             tempCurr.rest = prev; // 1 should now point to null | 1 -> null | 2 -> 1 -> null | 3 -> 2 -> 1 -> null | 4 -> 3 -> 2 -> 1 -> null
             prev = tempCurr; // Prev pointer should point to 1 | prev = 1 | prev = 2 | prev = 3 | prev = 4
         }
-        A = prev;
-        return A;
+        return prev;
     }
 
 

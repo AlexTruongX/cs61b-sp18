@@ -39,9 +39,9 @@ public class LinkedListDeque<T> implements Deque<T>{
     }
 
     /* Adds an item of type T to the BACK of the deque
-    * 1. Make last node's .next point to new node.
-    * 2. Sets the sentinel's prev equal to the new last node
-    * */
+     * 1. Make last node's .next point to new node.
+     * 2. Sets the sentinel's prev equal to the new last node
+     * */
     public void addLast(T item) {
         sentinel.prev.next = new Node(sentinel.prev, item, sentinel);
         sentinel.prev = sentinel.prev.next;
@@ -61,9 +61,9 @@ public class LinkedListDeque<T> implements Deque<T>{
         return firstItem;
     }
     /** Remove the last node in the deque.
-    * 1. Sentinel.prev.prev.next -> make 2nd-to-last node point to the sentinel node
-    * 2. Sentinel.prev = sentinel.prev.prev -> remove the last node from LList
-    * */
+     * 1. Sentinel.prev.prev.next -> make 2nd-to-last node point to the sentinel node
+     * 2. Sentinel.prev = sentinel.prev.prev -> remove the last node from LList
+     * */
     public T removeLast() {
         if (sentinel.prev.item == null) {
             return null;
@@ -76,9 +76,9 @@ public class LinkedListDeque<T> implements Deque<T>{
     }
 
     /**
-    * Gets the item at the given index.
-    *  1. tmpStl is a pointer for LList (prevents mutation)
-    * */
+     * Gets the item at the given index.
+     *  1. tmpStl is a pointer for LList (prevents mutation)
+     * */
     public T get(int index) {
         Node tmpStl = sentinel.next;
         for (int i = 0; i < index; i++) {

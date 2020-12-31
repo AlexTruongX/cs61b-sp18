@@ -1,4 +1,4 @@
-public class OffByN implements CharacterComparator{
+public class OffByN implements CharacterComparator {
     private int n;
 
     /* OffByN constructor for unique int N */

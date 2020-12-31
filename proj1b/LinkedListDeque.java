@@ -1,4 +1,4 @@
-public class LinkedListDeque<T> implements Deque<T>{
+public class LinkedListDeque<T> implements Deque<T> {
     /**
      * Invariants:
      *  1. Sentinel always represents the sentinel/placeholder node.

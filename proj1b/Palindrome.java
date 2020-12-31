@@ -35,7 +35,7 @@ public class Palindrome {
     private boolean isPalindrome(Deque letters, CharacterComparator cc) {
         if (letters.size() <= 1) {
             return true;
-        } else if (!cc.equalChars((char)letters.removeFirst(), (char)letters.removeLast())) {
+        } else if (!cc.equalChars((char) letters.removeFirst(), (char) letters.removeLast())) {
             return false;
         }
         return isPalindrome(letters, cc);

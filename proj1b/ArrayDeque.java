@@ -4,7 +4,7 @@
  * @author Alex Truong
  */
 
-public class ArrayDeque<T> implements Deque<T>{
+public class ArrayDeque<T> implements Deque<T> {
     private T[] items;
     private int size;
     private int nextFirst; // Pointer to front

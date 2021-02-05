@@ -14,8 +14,6 @@ import java.util.Random;
 public class HexWorld {
     private static final int WIDTH = 50;
     private static final int HEIGHT = 50;
-    private static final int xOFF = 5;
-    private static final int yOFF = 5;
 
     /**
      * 1. Initialize TileRenderer (TERenderer object)
@@ -31,27 +29,27 @@ public class HexWorld {
     public static void addHexagon(TETile[][] world, int s) {
         assert s >= 2;
         int maxRowLength = calculateMaxLength(s);
-        int startingX = calculateStartX(maxRowLength);
-        int startingY = calculateStartY(maxRowLength);
-        System.out.println(startingX);
-        System.out.println(startingY);
+        int originalX = calculateStartX(maxRowLength);
+        int originalY = calculateStartY(maxRowLength);
+
         construct(world);
-        buildMiddle(world, maxRowLength, startingX, startingY);
-        buildTop(world, s, maxRowLength, startingX, startingY);
+        buildMiddle(world, maxRowLength, originalX, originalY);
+        buildTop(world, s, maxRowLength, originalX, originalY);
+        buildBot(world, s, maxRowLength, originalX, originalY);
     }
 
     public static void buildMiddle(TETile[][] world, int rowLength, int posX, int posY) {
         for (int y = posY; y < posY + 2; y += 1) {
             for (int x = posX; x < posX + rowLength; x += 1) {
-                world[x][y] = Tileset.WALL;
+                world[x][y] = Tileset.FLOWER;
             }
         }
     }
 
-    public static void buildTop(TETile[][] world, int size, int rowLength, int startX, int startY) {
-        // For building top: y begins at startY + 2 & x begins at startX + 1;
-        startY = startY + 2; // 21 -> 23
-        startX = startX + 1; // 21 -> 22
+    private static void buildTop(TETile[][] world, int size, int rowLength, int posX, int posY) {
+        // For building top:
+        int startY = posY + 2; // 21 -> 23
+        int startX = posX + 1; // 21 -> 22
         int endY = startY + size - 1; // 25
         int endX = startX + rowLength - 2; // 22 + 7 - 1 -> 28
         for (int y = startY; y < endY; y++) {
@@ -60,6 +58,20 @@ public class HexWorld {
             }
             startX++;
             endX--;
+        }
+    }
+
+    private static void buildBot(TETile[][] world, int size, int rowLength, int posX, int posY) {
+        int startY = posY - 1; // Starting y-pos for building 1st bot row
+        int startX = posX + 1; // Starting x-pos for building 1st bot row
+        int endY = startY - size + 1; // End y-pos for building bot
+        int endX = startX + rowLength - 2; // End x-pos for each row
+        for (int y = startY; y > endY; y--) {
+            for (int x = startX; x < endX; x++) {
+                world[x][y] = Tileset.FLOWER;
+            }
+            startX++; // Increments starting x-pos after building a row (moves 1-tile to right)
+            endX--; // Decrements ending x-pos after building a row (moves 1 tile to left)
         }
     }
 
@@ -98,12 +110,7 @@ public class HexWorld {
         ter.initialize(WIDTH, HEIGHT);
 
         TETile[][] tiles = new TETile[WIDTH][HEIGHT];
-        addHexagon(tiles, 5);
-//        for (int y = 23; y < 26; y++) {
-//            for (int x = 22; x < 27; x++) {
-//                tiles[x][y] = Tileset.FLOWER;
-//            }
-//        }
+        addHexagon(tiles, 2);
 
         ter.renderFrame(tiles);
     }

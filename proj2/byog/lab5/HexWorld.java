@@ -50,11 +50,11 @@ public class HexWorld {
 
     public static void buildTop(TETile[][] world, int size, int rowLength, int startX, int startY) {
         // For building top: y begins at startY + 2 & x begins at startX + 1;
-        startY = startY + 2;
-        startX = startX + 1;
-        int endY = startY + size - 1;
-        int endX = startX + rowLength - 1;
-        for (int y = startY + 2; y < endY; y++) {
+        startY = startY + 2; // 21 -> 23
+        startX = startX + 1; // 21 -> 22
+        int endY = startY + size - 1; // 25
+        int endX = startX + rowLength - 2; // 22 + 7 - 1 -> 28
+        for (int y = startY; y < endY; y++) {
             for (int x = startX; x < endX; x++) {
                 world[x][y] = Tileset.FLOWER;
             }
@@ -98,10 +98,10 @@ public class HexWorld {
         ter.initialize(WIDTH, HEIGHT);
 
         TETile[][] tiles = new TETile[WIDTH][HEIGHT];
-        addHexagon(tiles, 3);
-//        for (int x = 22; x < 27; x++) {
-//            for (int y = 23; y < 24; y++) {
-//                tiles[x][y] = Tileset.WALL;
+        addHexagon(tiles, 5);
+//        for (int y = 23; y < 26; y++) {
+//            for (int x = 22; x < 27; x++) {
+//                tiles[x][y] = Tileset.FLOWER;
 //            }
 //        }
 

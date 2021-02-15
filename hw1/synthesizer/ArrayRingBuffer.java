@@ -51,7 +51,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         first = plusOne(first);
         fillCount -= 1;
         return item;
-     }
+    }
 
     /**
      * Return oldest item, but don't remove it.

@@ -9,7 +9,7 @@ public class GuitarString {
     public GuitarString(double frequency) {
         int capacity = (int) Math.round(SR / frequency);
         buffer = new ArrayRingBuffer<>(capacity);
-        for (int i = 0; i < buffer.capacity(); i+= 1) {
+        for (int i = 0; i < buffer.capacity(); i += 1) {
             buffer.enqueue(0.0);
         }
     }
@@ -22,7 +22,7 @@ public class GuitarString {
             buffer.dequeue();
             buffer.enqueue(r);
         }
-     }
+    }
 
     /* Advance the simulation one time step by performing one iteration of
      * the Karplus-Strong algorithm. 
@@ -30,7 +30,7 @@ public class GuitarString {
     public void tic() {
         double first = buffer.dequeue();
         double second = buffer.peek();
-        double plucked = ((first + second)/2) * DECAY;
+        double plucked = ((first + second) / 2) * DECAY;
         buffer.enqueue(plucked);
     }
 

@@ -64,4 +64,31 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         return rb[first];
     }
 
+    private class ARBIterator implements Iterator<T> {
+        private int pos; // tracks start position of buffer (oldest item -> newest)
+        private int counter; // tracks # of indexes accessed
+
+        public ARBIterator() {
+            pos = first;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return counter < fillCount();
+        }
+
+        @Override
+        public T next() {
+            T item = rb[pos];
+            pos = plusOne(pos);
+            counter++;
+            return item;
+        }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new ARBIterator();
+    }
+
 }
